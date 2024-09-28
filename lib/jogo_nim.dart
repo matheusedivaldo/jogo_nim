@@ -16,12 +16,7 @@ class JogoNim {
   }
 
   void computadorJogar() {
-    int computadorRemocao = 1;
-    if (totalPalitos >= 3) {
-      computadorRemocao = 3;
-    } else {
-      computadorRemocao = totalPalitos;
-    }
+    int computadorRemocao = totalPalitos >= 3 ? 3 : totalPalitos;
     totalPalitos -= computadorRemocao;
   }
 
