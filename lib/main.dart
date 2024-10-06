@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'jogo_nim.dart';
 
 void main() {
@@ -29,7 +30,24 @@ class _JogoNimScreenState extends State<JogoNimScreen> {
   @override
   void initState() {
     super.initState();
+    _carregarPlacar();
     iniciarJogo(10);
+  }
+
+  // Carregar placar salvo localmente
+  void _carregarPlacar() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      usuarioVitorias = prefs.getInt('usuarioVitorias') ?? 0;
+      computadorVitorias = prefs.getInt('computadorVitorias') ?? 0;
+    });
+  }
+
+  // Salvar placar localmente
+  void _salvarPlacar() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('usuarioVitorias', usuarioVitorias);
+    await prefs.setInt('computadorVitorias', computadorVitorias);
   }
 
   void iniciarJogo(int palitos) {
@@ -53,6 +71,7 @@ class _JogoNimScreenState extends State<JogoNimScreen> {
       if (resultado.isNotEmpty) {
         if (resultado == 'Você venceu!') {
           usuarioVitorias++;
+          _salvarPlacar(); // Salvar placar após vitória
         }
       } else {
         jogoNim.computadorJogar();
@@ -60,6 +79,7 @@ class _JogoNimScreenState extends State<JogoNimScreen> {
 
         if (resultado == 'O computador venceu!') {
           computadorVitorias++;
+          _salvarPlacar(); // Salvar placar após derrota
         }
       }
     });
@@ -201,7 +221,7 @@ class _JogoNimScreenState extends State<JogoNimScreen> {
         padding: EdgeInsets.symmetric(
           horizontal: larguraTela < 400 ? 8 : 16,
           vertical: larguraTela < 400 ? 12 : 16,
-        ), // Ajuste do padding de acordo com o tamanho da tela
+        ),
       ),
       onPressed: () => jogar(palitos),
       child: Text(
