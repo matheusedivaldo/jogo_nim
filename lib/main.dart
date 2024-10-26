@@ -34,7 +34,6 @@ class _JogoNimScreenState extends State<JogoNimScreen> {
     iniciarJogo(10);
   }
 
-  // Carregar placar salvo localmente
   void _carregarPlacar() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -43,7 +42,6 @@ class _JogoNimScreenState extends State<JogoNimScreen> {
     });
   }
 
-  // Salvar placar localmente
   void _salvarPlacar() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('usuarioVitorias', usuarioVitorias);
@@ -71,7 +69,7 @@ class _JogoNimScreenState extends State<JogoNimScreen> {
       if (resultado.isNotEmpty) {
         if (resultado == 'Você venceu!') {
           usuarioVitorias++;
-          _salvarPlacar(); // Salvar placar após vitória
+          _salvarPlacar();
         }
       } else {
         jogoNim.computadorJogar();
@@ -79,7 +77,7 @@ class _JogoNimScreenState extends State<JogoNimScreen> {
 
         if (resultado == 'O computador venceu!') {
           computadorVitorias++;
-          _salvarPlacar(); // Salvar placar após derrota
+          _salvarPlacar();
         }
       }
     });
