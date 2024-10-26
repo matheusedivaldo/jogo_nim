@@ -1,2 +1,2 @@
-# jogo_nim
+# NIM
 Projeto GUI Jogo NIM em Flutter
