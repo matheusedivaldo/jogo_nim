@@ -1,18 +1,18 @@
 name: jogo_nim
 description: "A new Flutter project."
 
-publish_to: "none" # Remove this line if you desejar publicar no pub.dev
+publish_to: "none" # Remove esta linha se você desejar publicar no pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.3
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
-  shared_preferences: ^2.0.6 # Adiciona a dependência do shared_preferences
+  http: ^1.2.2
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
